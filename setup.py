@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="RusticML",                     # This is the name of the package
-    version="0.0.1",                     # The initial release version
+    version="0.0.4",                     # The initial release version
     author="yaegerknight, ani_ash",      # Full name of the author
     description="A simple machine learning framework",
     long_description=long_description,      # Long description read from the the readme file
@@ -19,5 +19,5 @@ setuptools.setup(
     python_requires='>=3.8',                # Minimum version requirement of the package
     py_modules=["RusticML"],             # Name of the python package
     package_dir={'':'RusticML/src'},     # Directory of the source code of the package
-    install_requires=['numpy==1.23.4']                     # Install other dependencies if any
+    install_requires=['numpy==1.23.4','dill==0.3.6']                     # Install other dependencies if any
 )

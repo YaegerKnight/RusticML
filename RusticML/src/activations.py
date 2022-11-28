@@ -2,22 +2,45 @@
 description: This file contains all the functions required to activate a layer
 """
 import numpy as np
+from core import Tensor
 
-class Sigmoid():
+def Softmax(x: Tensor):
 
-    def __call__(self, x):
-        return 1/(1 + np.exp(-x))
+    exp = np.exp(x.value - np.max(x.value))
+    result = Tensor(exp / exp.sum()) 
+
+    return result
+
+def tanh(x: Tensor):
+
+    output = (np.exp(x.value) - np.exp(-x.value))/(np.exp(x.value) + np.exp(-x.value))
+    result = Tensor(value=output, parents=(x,))
     
-    def grad(self, x):
-        return self.__call__(x) * (1 - self.__call__(x))
-
-class ReLU():
-
-    def __call__(self, x):
-        return np.max(0, x)
+    def _backward():
+        x.gradient +=  (1 - (output ** 2)) * result.gradient
     
-    def grad(self, x):
-        return int((x*1) > 0)
+    result._backward = _backward
+    return result
 
-class Softmax(self, x):
+def ReLU(x: Tensor):
+
+    output = np.max(x.value, 0)
+    result = Tensor(value=output, parents=(x,))
+
+    def _backward():
+        x.gradient += (int((output*1) >0)) * result.gradient
     
+    result._backward = _backward
+
+    return result
+
+def Sigmoid(x: Tensor):
+
+    output = 1/(1 + np.exp(-x.value))
+    result = Tensor(value=output, parents=(x,))
+
+    def _backward():
+        x.gradient += 1.0 * output * (1 - output) * result.gradient
+    result._backward = _backward
+
+    return result

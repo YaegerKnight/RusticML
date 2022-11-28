@@ -5,5 +5,5 @@ A machine learning framework written in Python that demonstrates the inner worki
 ### Features
 
 - Supports auto-diff backward propagation
-- Supports implementation of Multi-layer Perceptron and Convolutional Neural Networks
-- Provides a GPU-based high performance implementation for fast execution (Nvidia GPU specifically.)
+- Supports implementation of Multi-layer Perceptron
+- Supports popular activation functions such as Tanh, ReLU and Sigmoid
